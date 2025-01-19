@@ -1,0 +1,77 @@
+doctrine:
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
+
+        # IMPORTANT: You MUST configure your server version,
+        # either here or in the DATABASE_URL env var (see .env file)
+        #server_version: '16'
+
+        profiling_collect_backtrace: '%kernel.debug%'
+        use_savepoints: true
+    orm:
+        auto_generate_proxy_classes: true
+        enable_lazy_ghost_objects: true
+        report_fields_where_declared: true
+        validate_xml_mapping: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        identity_generation_preferences:
+            Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
+        auto_mapping: true
+        mappings:
+            Cart:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Cart/Infrastructure/Persistence'
+                prefix: 'App\Cart\Domain'
+                alias: Cart
+            CartItem:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/CartItem/Infrastructure/Persistence'
+                prefix: 'App\CartItem\Domain'
+                alias: CartItem
+            Order:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Order/Infrastructure/Persistence'
+                prefix: 'App\Order\Domain'
+                alias: Order
+            OrderItem:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/OrderItem/Infrastructure/Persistence'
+                prefix: 'App\OrderItem\Domain'
+                alias: OrderItem
+            Product:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Product/Infrastructure/Persistence'
+                prefix: 'App\Product\Domain'
+                alias: Product
+        controller_resolver:
+            auto_mapping: false
+
+when@test:
+    doctrine:
+        dbal:
+            url: 'sqlite:///:memory:'
+
+when@prod:
+    doctrine:
+        orm:
+            auto_generate_proxy_classes: false
+            proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
+            query_cache_driver:
+                type: pool
+                pool: doctrine.system_cache_pool
+            result_cache_driver:
+                type: pool
+                pool: doctrine.result_cache_pool
+
+    framework:
+        cache:
+            pools:
+                doctrine.result_cache_pool:
+                    adapter: cache.app
+                doctrine.system_cache_pool:
+                    adapter: cache.system
