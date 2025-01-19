@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+    phpsiroko:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile
+        container_name: phpsiroko
+        networks:
+            - pruebasiroko
+        depends_on:
+            - mysqlsiroko
+        ports:
+            - "8000:80"
+        volumes:
+            - .:/var/www/html
+            - ~/.composer:/home/user/.composer
+    mysqlsiroko:
+        image: mysql:latest
+        container_name: mysqlsiroko
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: pruebasiroko
+        volumes:
+            - mysqlsiroko_data:/var/lib/mysql
+        networks:
+            - pruebasiroko
+networks:
+    pruebasiroko:
+
+volumes:
+    mysqlsiroko_data:
