@@ -10,8 +10,8 @@
         </id>
 
         <field name="status" column="status" length="50"/>
-        <field name="createdAt" type="datetime" column="created_at"/>
-        <field name="updatedAt" type="datetime" column="updated_at"/>
+        <field name="createdAt" type="datetime_immutable" column="created_at"/>
+        <field name="updatedAt" type="datetime_immutable" column="updated_at"/>
 
         <one-to-one field="cart" target-entity="App\Cart\Domain\Cart" />
     </entity>

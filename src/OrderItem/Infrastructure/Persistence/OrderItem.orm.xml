@@ -11,7 +11,7 @@
 
         <field name="quantity" type="integer" column="quantity"/>
         <field name="price" type="decimal" column="price" precision="10" scale="2"/>
-        <field name="createdAt" type="datetime" column="created_at"/>
+        <field name="createdAt" type="datetime_immutable" column="created_at"/>
 
         <many-to-one field="product" target-entity="App\Product\Domain\Product">
             <join-column name="product_id" nullable="false"/>

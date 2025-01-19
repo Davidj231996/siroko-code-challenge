@@ -10,8 +10,8 @@
         </id>
 
         <field name="quantity" type="integer" column="quantity"/>
-        <field name="createdAt" type="datetime" column="created_at"/>
-        <field name="updatedAt" type="datetime" column="updated_at"/>
+        <field name="createdAt" type="datetime_immutable" column="created_at"/>
+        <field name="updatedAt" type="datetime_immutable" column="updated_at"/>
 
         <many-to-one field="product" target-entity="App\Product\Domain\Product">
             <join-column name="product_id" nullable="false"/>

@@ -12,8 +12,8 @@
         <field name="name" column="name" length="255"/>
         <field name="price" type="decimal" column="price" precision="10" scale="2"/>
         <field name="stock" type="integer" column="stock"/>
-        <field name="createdAt" type="datetime" column="created_at"/>
-        <field name="updatedAt" type="datetime" column="updated_at"/>
+        <field name="createdAt" type="datetime_immutable" column="created_at"/>
+        <field name="updatedAt" type="datetime_immutable" column="updated_at"/>
     </entity>
 
 </doctrine-mapping>
